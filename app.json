@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "expo-native-app",
-    "slug": "expo-native-app",
+    "name": "test-task",
+    "slug": "test-task",
     "platforms": [
       "ios",
       "android",
@@ -23,6 +23,8 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": "Test task for Maxidom",
+    "githubUrl": "https://github.com/fantazey/maxidom-test.git"
   }
 }

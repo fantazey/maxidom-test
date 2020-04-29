@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import ItemsList from "./components/ItemsList";
 import InputField from "./components/InputField";
+import Menu from "./components/Menu";
 
 export default class App extends React.Component {
 
@@ -63,7 +64,7 @@ export default class App extends React.Component {
       );
       return;
     }
-    items.push({id: lastId + 1, text: input});
+    items.splice(0,0, {id: lastId + 1, text: input});
     this.setState({
       input: '',
       items: items,
@@ -71,10 +72,10 @@ export default class App extends React.Component {
     });
   };
 
-  onClickResetInput = () => {
+  onClickResetList = () => {
     this.setState({
-      input: ''
-    });
+      items: []
+    })
   };
 
   updateValue = input => {
@@ -94,25 +95,24 @@ export default class App extends React.Component {
   };
 
   render() {
+    const {items, input} = this.state;
     return (
       <View style={styles.container}>
-        <InputField value={this.state.input} updateValue={this.updateValue} />
-        <View style={styles.buttonsRow}>
+        <InputField value={input} updateValue={this.updateValue} />
+        <View style={[styles.buttonsRow]}>
           <Button
             style={styles.button}
             onPress={this.onClickAddItem}
             title="Add item"/>
           <Button
             style={styles.button}
-            onPress={this.onClickResetInput}
-            title="Reset"/>
+            onPress={this.onClickResetList}
+            title="Reset list"/>
         </View>
-        <View style={{maxHeight: 300, width: '100%'}}>
-          <ItemsList items={this.state.items} remove={this.removeItem}/>
+        <View style={styles.listContainer}>
+          <ItemsList items={items} remove={this.removeItem}/>
         </View>
-        <View>
-          <Button title="Menu"/>
-        </View>
+        <Menu />
       </View>
     );
   }
@@ -125,26 +125,19 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: "center",
-    marginTop: 100,
     flexDirection: 'column'
-  },
-  inputRow: {
-    alignItems: 'stretch',
-    marginBottom: 20
   },
   buttonsRow: {
     width: '100%',
     alignItems: 'stretch',
     flexDirection: 'row',
-    paddingHorizontal: 100,
+    paddingHorizontal: 50,
     marginBottom: 20,
     justifyContent: 'space-around',
+    zIndex: 0
   },
-  button: {
-    width: '10%'
-  },
-  input: {
-    borderColor: '#000',
-    borderWidth: 1
-  },
+  listContainer: {
+    maxHeight: 300,
+    width: '100%'
+  }
 });

@@ -3,7 +3,8 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  View} from "react-native";
+  View
+} from "react-native";
 
 export default class InputField extends React.Component {
   state = {
@@ -17,7 +18,7 @@ export default class InputField extends React.Component {
   }
 
   onInputChange = event => {
-    const val = event.target.value;
+    const val = event.nativeEvent.text;
     this.setState({input: val});
     this.props.updateValue(val);
   };
@@ -36,6 +37,7 @@ export default class InputField extends React.Component {
 const styles = StyleSheet.create({
   inputRow: {
     alignItems: 'stretch',
+    marginTop: 70,
     marginBottom: 20,
     width: '60%'
   },
