@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   StyleSheet,
-  TouchableHighlight,
   TouchableOpacity,
   TouchableWithoutFeedback,
   Button,
@@ -9,8 +8,9 @@ import {
   View,
   BackHandler
 } from 'react-native';
+import {useNavigation, useRoute} from '@react-navigation/native'
 
-export default class Menu extends React.Component {
+class Menu extends React.Component {
   state = {
     visible: false
   };
@@ -24,12 +24,30 @@ export default class Menu extends React.Component {
   };
 
   onClickAbout = () => {
+    this.props.navigation.navigate('About');
+    this.hideMenu();
+  };
 
+  onClickMain = () => {
+    this.props.navigation.navigate('Main');
+    this.hideMenu();
   };
 
   onClickExit = () => {
     BackHandler.exitApp();
   };
+
+  get navigationButton() {
+    let title = 'About',
+        clickHandler = this.onClickAbout;
+    if (this.props.route.name === 'About') {
+      title = 'Main';
+      clickHandler = this.onClickMain;
+    }
+    return <Button
+      title={title}
+      onPress={clickHandler}/>;
+  }
 
   render() {
     if (!this.state.visible) {
@@ -44,9 +62,7 @@ export default class Menu extends React.Component {
           <View
             style={styles.menuBtnContainer}>
             <View style={styles.menuBtnWrapper}>
-              <Button
-                title="About"
-                onPress={this.onClickAbout}/>
+              {this.navigationButton}
             </View>
             <View style={styles.menuBtnWrapper}>
               <Button
@@ -60,6 +76,14 @@ export default class Menu extends React.Component {
     </TouchableOpacity>
   }
 }
+
+function MenuWrapper(props) {
+  const navigation = useNavigation();
+  const route = useRoute();
+  return <Menu {...props} navigation={navigation} route={route}/>
+}
+
+export default MenuWrapper;
 
 const styles = StyleSheet.create({
   backdrop: {
