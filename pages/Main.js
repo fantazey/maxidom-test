@@ -98,11 +98,11 @@ export default class Main extends React.Component {
           <Button
             style={styles.button}
             onPress={this.onClickAddItem}
-            title="Add item"/>
+            title="Добавить"/>
           <Button
             style={styles.button}
             onPress={this.onClickResetList}
-            title="Reset list"/>
+            title="Обнулить"/>
         </View>
         <View style={styles.listContainer}>
           <ItemsList items={items} remove={this.removeItem}/>

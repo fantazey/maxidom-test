@@ -38,10 +38,10 @@ class Menu extends React.Component {
   };
 
   get navigationButton() {
-    let title = 'About',
+    let title = 'О программе',
         clickHandler = this.onClickAbout;
     if (this.props.route.name === 'About') {
-      title = 'Main';
+      title = 'Главная';
       clickHandler = this.onClickMain;
     }
     return <Button
@@ -52,7 +52,7 @@ class Menu extends React.Component {
   render() {
     if (!this.state.visible) {
       return <View style={styles.menuButton}>
-        <Button title="Menu" onPress={this.showMenu}/>
+        <Button title="Меню" onPress={this.showMenu}/>
       </View>;
     }
     return <TouchableOpacity onPress={this.hideMenu} style={styles.backdrop}>
@@ -66,7 +66,7 @@ class Menu extends React.Component {
             </View>
             <View style={styles.menuBtnWrapper}>
               <Button
-                title="Exit"
+                title="Выход"
                 color="red"
                 onPress={this.onClickExit}/>
             </View>
