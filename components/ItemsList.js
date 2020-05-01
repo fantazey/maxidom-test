@@ -11,15 +11,17 @@ import {
 const closeIcon = require('../assets/close_icon.png');
 
 function Item({item, onPress}) {
-  return <View style={styles.item_container}>
-    <TouchableHighlight style={styles.item_highlight}>
-      <View style={styles.item_inner}>
-        <Text style={styles.item_text}>
-          {item.text}
-        </Text>
-        <View style={{height: 20, width: 20, padding: 5}}>
-          <TouchableHighlight underlayColor="#ddd" onPress={onPress} style={styles.item_close_touch}>
-            <Image source={closeIcon} style={styles.item_image}/>
+  return <View style={styles.itemContainer}>
+    <TouchableHighlight style={styles.itemHighlight}>
+      <View style={styles.itemInner}>
+        <View style={{width: '90%'}}>
+          <Text style={styles.itemText} numberOfLines={1}>
+            {item.text}
+          </Text>
+        </View>
+        <View style={styles.removeIconWrapper}>
+          <TouchableHighlight underlayColor="#ddd" onPress={onPress} style={styles.itemCloseTouch}>
+            <Image source={closeIcon} style={styles.itemImage}/>
           </TouchableHighlight>
         </View>
       </View>
@@ -48,32 +50,38 @@ const styles = StyleSheet.create({
     paddingLeft: 30,
     paddingRight: 30
   },
-  item_highlight: {
+  itemHighlight: {
     backgroundColor: '#f3f3f3',
     paddingVertical: 5,
     paddingHorizontal: 5
   },
-  item_container: {
+  itemContainer: {
     paddingLeft: 10,
     marginVertical: 5
   },
-  item_text: {
+  itemText: {
     display: 'flex',
     fontSize: 17,
-    fontWeight: '200'
+    fontWeight: '200',
   },
-  item_image: {
-    height: 10,
-    width: 10
+  itemImage: {
+    height: '100%',
+    width: '100%'
   },
-  item_inner: {
+  itemInner: {
+    height: 20,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center'
   },
-  item_close_touch: {
+  itemCloseTouch: {
     height: '100%',
     width: '100%',
+  },
+  removeIconWrapper: {
+    width: 20,
+    height: 20,
+    alignSelf: 'flex-end'
   }
 });
