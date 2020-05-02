@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   StyleSheet,
   Text,
@@ -33,6 +34,11 @@ export default class InputField extends React.Component {
     </View>
   }
 }
+
+InputField.propTypes = {
+  value: PropTypes.string.isRequired,
+  updateValue: PropTypes.func.isRequired
+};
 
 const styles = StyleSheet.create({
   inputRow: {

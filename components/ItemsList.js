@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Image,
   TouchableHighlight,
@@ -19,15 +20,25 @@ function Item({item, onPress}) {
             {item.text}
           </Text>
         </View>
-        <View style={styles.removeIconWrapper}>
-          <TouchableHighlight underlayColor="#ddd" onPress={onPress} style={styles.itemCloseTouch}>
-            <Image source={closeIcon} style={styles.itemImage}/>
-          </TouchableHighlight>
-        </View>
+        {onPress ?
+          <View style={styles.removeIconWrapper}>
+            <TouchableHighlight underlayColor="#ddd" onPress={onPress} style={styles.itemCloseTouch}>
+              <Image source={closeIcon} style={styles.itemImage}/>
+            </TouchableHighlight>
+          </View> :
+          null
+        }
       </View>
     </TouchableHighlight>
   </View>;
 }
+
+Item.propTypes = {
+  item: PropTypes.shape({
+    text: PropTypes.string
+  }).isRequired,
+  onPress: PropTypes.func
+};
 
 export default class ItemsList extends React.Component {
   render() {
@@ -43,6 +54,14 @@ export default class ItemsList extends React.Component {
     </View>
   }
 }
+
+ItemsList.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    text: PropTypes.string
+  })),
+  remove: PropTypes.func
+};
 
 const styles = StyleSheet.create({
   listView: {
